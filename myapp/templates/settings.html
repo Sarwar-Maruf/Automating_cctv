@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+    <style>
+    body {
+      font-family: Arial;
+    }
+    
+    input[type=text], select {
+      width: 50%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    input[type=submit] {
+      width: 50%;
+      background-color: #ecb3ff;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    input[type=submit]:hover {
+      background-color: #cc33ff;
+    }
+    
+    div.container {
+      border-radius: 5px;
+    
+      padding: 20px;
+    }
+    </style>
+   
+     <script>
+            $(document).ready(function(){
+                $('.chkcvalues').click(function(){
+                    var txt = "";
+                    $('.chkcvalues:checked').each(function(){
+                        txt+= $(this).val()+","
+
+                    });
+                    txt = txt.substr(0, txt.length-1);
+                    $('#txtvalues').val(txt);
+                
+                });
+            });
+     </script>
+   
+</head>
+
+<body>
+
+
+<!-- 
+<center>
+
+
+</center> -->
+
+
+
+<!-- <div class="container">
+
+    <form action='analyze' method='post'>
+     {% csrf_token %}
+    
+    
+    
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Filter</label>
+    </div>
+    
+    <div class="custom-control custom-switch">
+    <input type="checkbox" name="human" class="custom-control-input" id="customSwitch1">
+    <label class="custom-control-label" for="customSwitch1">Capture videos when Human found</label>
+    </div>
+     
+    <div class="custom-control custom-switch">
+    <input type="checkbox"  name="emergency" class="custom-control-input" id="customSwitch3">
+    <label class="custom-control-label" for="customSwitch3">Emergency Help</label>
+    </div>
+    
+    <div class="custom-control custom-switch">
+    <input type="checkbox"  name="Fire" class="custom-control-input" id="customSwitch4">
+    <label class="custom-control-label" for="customSwitch4">Fire</label>
+    </div>
+    
+    <button type="submit" class="btn btn-dark mt-2">Analyze Text</button>
+      </form>
+</div> -->
+
+<center>
+    <form method = "POST">
+        {% csrf_token %}
+        Surveilling Mode:
+        <input type="checkbox" value="human" class = "chkcvalues" /> Heavy Duty
+        <input type="checkbox" value="emergency"class = "chkcvalues" /> Emergency Help
+        <input type="checkbox" value="fire" class = "chkcvalues"/> Fire Detection
+        <hr/>
+        <input type="text" name = "filters" id = "txtvalues" />
+        <input id ="but1" type = "submit" value = "Start Surveilling" onclick="return alert('Filters Saved Seccessfully')"> 
+    </form>
+
+</center>
+
+</body>
+</html>
+
+
+
+{% endblock %}
